@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				if (audio.buffered.start(audio.buffered.length - 1 - i) < audio.currentTime) {
 					const bufferedEnd = audio.buffered.end(audio.buffered.length - 1 - i);
 					const duration = audio.duration;
-        
+
 					// Calculate and apply the percentage
 					const bufferedPercent = (bufferedEnd / duration) * 100;
 
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					break;
 				}
 
-			
+
 			}
 		}
 	});
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		console.log("loadstart")
 	});
 
-	audio.addEventListener("loadeddata", () => { 
+	audio.addEventListener("loadeddata", () => {
 		/** @type {HTMLDivElement} | Null */
 		const alert = issueAlert("loadeddata", "audio file loaded", true)
 		setTimeout(() => { alert.remove() }, 1500)
@@ -157,10 +157,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		const mins = Math.floor(seconds / 60);
 		const secs = Math.floor(seconds % 60);
-    
+
 		const displayMins = String(mins).padStart(2, '0');
 		const displaySecs = String(secs).padStart(2, '0');
-    
+
 		return `${displayMins}:${displaySecs}`;
 	};
 
@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (target === prevTarget) {
 			return
 		}
-		
+
 
 		if (target) {
 			const parent = target.closest('div.card');
@@ -227,7 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				prevParent = parent
 			}
 
-			console.log(target === prevTarget)
 			target.scrollIntoView({
 				behavior: 'smooth',
 				block: 'start'
