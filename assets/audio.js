@@ -56,10 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	/** @type {HTMLProgressElement} */
 	const loadingBar = document.getElementById("loading-bar")
 
-	audio.addEventListener("progress", () => {
-		console.log(audio.buffered)
+	audio.addEventListener("progress", (e) => {
+		console.log("progress received", audio.buffered, e)
 		if (audio.duration > 0) {
-
 			for (let i = 0; i < audio.buffered.length; i++) {
 				if (audio.buffered.start(audio.buffered.length - 1 - i) < audio.currentTime) {
 					const bufferedEnd = audio.buffered.end(audio.buffered.length - 1 - i);
@@ -75,7 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 			}
-		}
+		} else if (audio.duration === Infinity) {
+			audio.currentTime = 1e101; // Seek to a massive number
+			audio.addEventListener('timeupdate', function listener() {
+			    audio.currentTime = 0; // Go back to start
+			    audio.removeEventListener('timeupdate', listener);
+			}, { once: true });
+    }
 	});
 
 
@@ -98,7 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		console.log("loadfinished")
 	});
 
-	audio.addEventListener("loadedmetadata", () => {
+	audio.addEventListener("loadedmetadata", (e) => {
+		console.log("loadedmetadata received ", e)
 		updateDurationTimer()
 		updateCurrentTimeTimer()
 	});
