@@ -175,7 +175,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-	playButton.addEventListener('click', () => { play() });
+	
+	playButton?.addEventListener('click', () => { play() });
 
 	let sections = document.querySelectorAll('a[data-start]');
 	let paragraphs = document.querySelectorAll('p[data-start]');
